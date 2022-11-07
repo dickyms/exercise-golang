@@ -1,5 +1,6 @@
 package main
 //Belajar GoRoutines
+//Jalankan file ini dengan mode unit testing
 /*
     *concurrency dan parallel programming
     Parallel programming adalah memecahkan suatu masalah dengan membaginya jadi kecil
@@ -44,14 +45,19 @@ func TestCreateGoroutine(t *testing.T) {
     time.Sleep(10 * time.Nanosecond)
 }
 
-func DisplayNumber(number int ) {
-    fmt.Println("Display ", number)
+/*
+func TestCreateGoroutine(t *testing.T) {
+    go RunHelloWorld()
+    fmt.Println("UPS")
 }
 
-func TestManyGoroutine(t *testing.T) {
-    for i := 0 ; i < 10000; i++ {
-       go DisplayNumber(i)
-    }
-
-    time.Sleep(5 * time.Second)
-}
+pada pengujian ini bisa jadi hello word nya gak ada karena bisa jadi ketika aplikasi
+sudah selesai goroutinenya belum selesai dikerjakan
+Ketika ditambahkan time sleep, go routine udah keburu jalan dan diselesaikan
+=== RUN   TestCreateGoroutine
+UPS
+Hello World
+--- PASS: TestCreateGoroutine (0.02s)
+PASS
+ok      belajar-golang  0.466s
+*/
