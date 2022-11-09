@@ -9,7 +9,7 @@ import (
 
 func TestCreateChannel(t *testing.T) {
     channel := make(chan string)
-    defer close(channel)
+    defer close(channel) // direkomendasikan ketika sudah membuat channel dan mengisinya untuk close() channel
     go func() {
         time.Sleep(2* time.Second)
         channel <- "Dicky M. S."
