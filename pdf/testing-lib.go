@@ -5,6 +5,10 @@ import (
     "regexp"
 )
 
+func sayHello (s string) string {
+	return "hello " + s
+}
+
 func TestHelloName(t *testing.T) {
     name := "Gladys"
     want := regexp.MustCompile(`\b`+name+`\b`)
