@@ -20,16 +20,23 @@ func (d Dictionary) Search(word string) (string, error){
 func TestSearch(t *testing.T) {
 	dic := Dictionary{"test": "this is just a test"}
 
-	assertStrings:= func(t testing.TB, got, want error) {
+	assertStrings:= func(t testing.TB, got, want string) {
 		t.Helper()
 		if got != want {
 			t.Errorf("got error %q want %q", got, want)
 		}
 	}
 
-	t.Run("know word", func(t *testing.T){
-		_, got := dic.Search("unknown")
-		assertStrings(t, got, ErrNotFound)
+	t.Run("known word", func(t *testing.T) {
+		got, _:= dic.Search("test")
+		want := "this is just a test"
+		assertStrings(t, got, want)
+	})
+
+	t.Run("unknown word", func(t *testing.T){
+		_, err := dic.Search("unknown")
+		want := "could not find the word you were looking for"
+		assertStrings(t, err.Error(), want)
 	})
 }
 

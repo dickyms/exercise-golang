@@ -1,5 +1,9 @@
-// belum selesai
+package main
 
+import (
+    "testing"
+	"errors"
+)
 
 var ErrNotFound = errors.New("could not find the word you were looking for")
 
@@ -13,42 +17,34 @@ func (d Dictionary) Search(word string) (string, error){
 	return definition, nil
 }
 
-func (d Dictionary) Add(w)
-
 func TestSearch(t *testing.T) {
 	dic := Dictionary{"test": "this is just a test"}
 
-	assertStrings:= func(t testing.TB, got, want error) {
+	assertStrings:= func(t testing.TB, got, want string) {
 		t.Helper()
 		if got != want {
 			t.Errorf("got error %q want %q", got, want)
 		}
 	}
 
-	t.Run("know word", func(t *testing.T){
+	assertError := func(t testing.TB, got, want error) {
+		t.Helper()
+		if got != want {
+			t.Errorf("got error %q want %q", got, want)
+		}
+	}
+
+	t.Run("known word", func(t *testing.T) {
+		got, _:= dic.Search("test")
+		want := "this is just a test"
+		assertStrings(t, got, want)
+	})
+
+	t.Run("unknown word", func(t *testing.T){
 		_, got := dic.Search("unknown")
-		assertStrings(t, got, ErrNotFound)
+		assertError(t, got, ErrNotFound)
 	})
 }
 
-func TestAdd(t *testing.T) {
-	t.Run("new word", func(t *testing.T) {
-		dic := Dictionary{}
-		word := "test"
-		definition := "this is just a test"
-
-		err := dic.Add(word, definition)
-		assertError(t, err, nil)
-		assertDefinition(t, dic, word, definition)
-	})
-
-	t.Run("existing word", func(t *testing.T) {
-		word := "test"
-		definition := "this is just a test"
-		dic := Dictionary{word: definition}
-		err := dic.Add(word, "new test")
-
-		assertError(t, err, ErrWordExists)
-		assertDefinition(t, dic, word, definition)
-	})
-}
+/*Part ini menguji apakan map yang dimasukan yang key yang tidak ada
+apakah mengembalikan error atau tidak*/
